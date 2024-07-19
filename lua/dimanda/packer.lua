@@ -46,21 +46,14 @@ return require("packer").startup(function(use)
 	})
 
 	-- themes
-	-- use({
-	--     "rose-pine/neovim",
-	--     as = "rose-pine",
-	--     config = function()
-	--         vim.cmd("colorscheme rose-pine-main")
-	--     end
-	-- })
 	use({
 		"projekt0n/github-nvim-theme",
 		config = function()
-			require("github-theme").setup({
-				require("dimanda.plugin.colors"),
-			})
+			require("dimanda.plugin.colors")
 		end,
 	})
+
+	use("olimorris/onedarkpro.nvim")
 
 	use({
 		"nvim-treesitter/nvim-treesitter",
@@ -69,6 +62,7 @@ return require("packer").startup(function(use)
 			require("dimanda.plugin.treesitter")
 		end,
 	})
+
 	-- justfile thing
 	use("IndianBoy42/tree-sitter-just")
 
@@ -95,7 +89,6 @@ return require("packer").startup(function(use)
 		end,
 	})
 
-	-- LSP things
 	use({
 		"VonHeikemen/lsp-zero.nvim",
 		branch = "v3.x",
@@ -108,17 +101,28 @@ return require("packer").startup(function(use)
 			{ "hrsh7th/cmp-nvim-lsp" },
 			{ "hrsh7th/cmp-nvim-lsp-signature-help" },
 			{ "L3MON4D3/LuaSnip" },
+			{ "lukas-reineke/lsp-format.nvim" },
+			{ "creativenull/efmls-configs-nvim", tag = "v1.*" },
+			{
+				"kevinhwang91/nvim-ufo",
+				requires = "kevinhwang91/promise-async",
+				config = function()
+					require("dimanda.plugin.folding")
+				end,
+			},
 		},
 		config = function()
 			require("dimanda.plugin.lsp")
 		end,
 	})
-	use({
-		"mhartington/formatter.nvim",
-		config = function()
-			require("dimanda.plugin.formatter")
-		end,
-	})
+
+	-- use({
+	-- 	"mhartington/formatter.nvim",
+	-- 	config = function()
+	-- 		require("dimanda.plugin.formatter")
+	-- 	end,
+	-- })
+
 	-- use {
 	--     "Issafalcon/lsp-overloads.nvim",
 	--     config = function()

@@ -1,48 +1,48 @@
 local glyphs = {}
 
-local installed, circles = pcall(require, 'circles')
+local installed, circles = pcall(require, "circles")
 if installed then
-  circles.setup({ icons = { empty = '', filled = '', lsp_prefix = '' } })
-  glyphs = circles.get_nvimtree_glyphs()
+	circles.setup({ icons = { empty = "", filled = "", lsp_prefix = "" } })
+	glyphs = circles.get_nvimtree_glyphs()
 end
 
 glyphs.git = {
-  unstaged = '',
-  staged = '',
-  unmerged = '',
-  renamed = '',
-  untracked = '',
-  deleted = '',
-  ignored = '',
+	unstaged = "",
+	staged = "",
+	unmerged = "",
+	renamed = "",
+	untracked = "",
+	deleted = "",
+	ignored = "",
 }
 
-require('nvim-tree').setup({
-  diagnostics = { enable = true },
-  view = {
-    width = 30,
-    side = 'left',
-    signcolumn = 'yes',
-  },
-  git = {
-    enable = true,
-    ignore = false,
-    timeout = 500,
-  },
-  actions = {
-    open_file = {
-      quit_on_open = true,
-    },
-  },
-  renderer = {
-    group_empty = true,
-    highlight_opened_files = 'all',
-    special_files = {},
-    root_folder_modifier = ':p:~',
-    icons = {
-      glyphs = glyphs,
-    },
-  },
+require("nvim-tree").setup({
+	diagnostics = { enable = true },
+	view = {
+		width = 30,
+		side = "left",
+		signcolumn = "yes",
+	},
+	git = {
+		enable = true,
+		ignore = false,
+		timeout = 500,
+	},
+	actions = {
+		open_file = {
+			quit_on_open = true,
+		},
+	},
+	renderer = {
+		group_empty = true,
+		highlight_opened_files = "all",
+		special_files = {},
+		root_folder_modifier = ":p:~",
+		icons = {
+			glyphs = glyphs,
+		},
+	},
 })
 
 -- Mappings
-vim.keymap.set('n', '<leader>pv', vim.cmd.NvimTreeToggle, { silent = true })
+vim.keymap.set("n", "<leader>pv", vim.cmd.NvimTreeToggle, { silent = true })

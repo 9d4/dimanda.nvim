@@ -39,6 +39,7 @@ require("formatter").setup({
 		html = { defaults.prettierd },
 		cpp = { defaults.clangformat },
 		c = { defaults.clangformat },
+		go = { require("formatter.filetypes.go").gofumpt, require("formatter.filetypes.go").goimports },
 		["*"] = {
 			require("formatter.filetypes.any").remove_trailing_whitespace,
 		},

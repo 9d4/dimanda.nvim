@@ -6,3 +6,4 @@ require("dimanda.packer")
 require("dimanda.statusline")
 require("dimanda.set")
 require("dimanda.remap")
+
