@@ -82,12 +82,17 @@ local prettier = {
 		"prettier.config.mjs",
 	},
 }
+local eslint_d = require("efmls-configs.linters.eslint_d")
+
 local languages = require("efmls-configs.defaults").languages()
 languages = vim.tbl_extend("force", languages, {
 	-- Custom languages, or override existing ones
 	html = { prettier },
-	typescript = { prettier },
-	javascript = { prettier },
+	typescript = { prettier, eslint_d },
+	javascript = { prettier, eslint_d },
+	typescriptreact = { prettier, eslint_d },
+	javascriptreact = { prettier, eslint_d },
+	json = { prettier },
 	lua = { require("efmls-configs.formatters.stylua") },
 	go = { require("efmls-configs.formatters.gofumpt") },
 })
