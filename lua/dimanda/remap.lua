@@ -11,6 +11,5 @@ vim.keymap.set("n", "<leader>wf", ":lua vim.lsp.buf.format()<CR>:w<CR>")
 -- enter visual mode then yank the line
 vim.keymap.set("n", "<leader>c", "V:y<CR>")
 
--- MACROS
--- go json struct
--- vim.keymap.set("n", "<leader>jj", 'veyA `json:"pcrsA"`')
+-- yank to clipboard
+vim.keymap.set("v", "<leader>y", '"+y')

@@ -1,9 +1,5 @@
-function InitMyColor(color)
-	-- color = color or "rose-pine"
-	-- color = color or "github_dark_default"
-	-- require("github-theme").setup({
-	-- 	vim.cmd.colorscheme(color),
-	-- })
+function InitMyColor()
+	local color = "github_dark_default"
 
 	-- vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
 	-- vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
@@ -16,8 +12,6 @@ function InitMyColor(color)
 			Directory = { bold = true },
 			ErrorMsg = { italic = true, bold = true },
 		},
-	})
-	require("onedarkpro").setup({
 		styles = {
 			types = "NONE",
 			methods = "NONE",
@@ -33,9 +27,39 @@ function InitMyColor(color)
 			conditionals = "italic",
 			virtual_text = "NONE",
 		},
+		colors = {
+			dark = { bg = "#161b22" },
+		},
 	})
 
-	vim.cmd.colorscheme("onedark_dark")
+	vim.cmd.colorscheme(color)
+	require("lualine").setup({
+		options = {
+			icons_enabled = false,
+			component_separators = { left = "|", right = "|" },
+			section_separators = { left = "", right = "" },
+		},
+		sections = {
+			lualine_a = { "mode", "time" },
+			lualine_b = { "branch" },
+			lualine_c = { { "filename", path = 1 } },
+			lualine_x = { "diff", "diagnostics", "encoding" },
+			lualine_y = { "progress", "location" },
+			lualine_z = {},
+		},
+	})
+	vim.cmd.set("noshowmode")
 end
 
-InitMyColor()
+return {
+	{ "nvim-lualine/lualine.nvim" },
+	{
+		"projekt0n/github-nvim-theme",
+		lazy = false,
+		priority = 1000,
+		config = function()
+			InitMyColor()
+		end,
+	},
+	{ "olimorris/onedarkpro.nvim" },
+}
