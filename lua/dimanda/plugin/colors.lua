@@ -1,10 +1,17 @@
 function InitMyColor()
-	local color = "github_dark_default"
+	-- local color = "github_dark_default"
+	local color = "okcolors"
 
 	-- vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
 	-- vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
 	-- vim.api.nvim_set_hl(0, "TelescopeNormal", { bg = "none" })
 	-- vim.api.nvim_set_hl(0, "TelescopeFloat", { bg = "none" })
+
+	require("github-theme").setup({
+		options = {
+			transparent = true,
+		},
+	})
 
 	require("onedarkpro").setup({
 		highlights = {
@@ -40,9 +47,9 @@ function InitMyColor()
 			section_separators = { left = "", right = "" },
 		},
 		sections = {
-			lualine_a = { "mode", "time" },
-			lualine_b = { "branch" },
-			lualine_c = { { "filename", path = 1 } },
+			lualine_a = { "mode", { "filename", path = 1 } },
+			lualine_b = {},
+			lualine_c = { "branch" },
 			lualine_x = { "diff", "diagnostics", "encoding" },
 			lualine_y = { "progress", "location" },
 			lualine_z = {},
@@ -62,4 +69,8 @@ return {
 		end,
 	},
 	{ "olimorris/onedarkpro.nvim" },
+	{ "gmr458/cold.nvim" },
+	{ "backdround/melting" },
+	{ "doums/espresso.nvim" },
+    { "e-q/okcolors.nvim", name = "okcolors" }
 }

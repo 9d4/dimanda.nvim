@@ -50,10 +50,28 @@ return {
 		require("luasnip.loaders.from_vscode").lazy_load()
 		require("mason").setup({})
 		require("mason-lspconfig").setup({
-			ensure_installed = { "tsserver", "lua_ls" },
 			handlers = {
 				function(server_name)
 					require("lspconfig")[server_name].setup({})
+				end,
+				["yamlls"] = function()
+					require("lspconfig").yamlls.setup({
+						capabilities = capabilities,
+						settings = {
+							yaml = {
+								schemas = {
+									kubernetes = "/*.yaml",
+									-- Add the schema for gitlab piplines
+									-- ["https://gitlab.com/gitlab-org/gitlab/-/raw/master/app/assets/javascripts/editor/schema/ci.json"] = "*.gitlab-ci.yml",
+								},
+							},
+						},
+					})
+				end,
+				["volar"] = function()
+					require("lspconfig").volar.setup({
+						filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue", "json" },
+					})
 				end,
 			},
 		})
@@ -106,30 +124,35 @@ return {
 
 		-- Formatters
 		local fs = require("efmls-configs.fs")
-		local prettier = {
-			formatCanRange = true,
-			formatCommand = string.format(
-				"%s '${INPUT}' ${--range-start=charStart} ${--range-end=charEnd} "
-					.. "${--tab-width=tabWidth} ${--use-tabs=!insertSpaces}",
-				fs.executable("prettierd", fs.Scope.NODE)
-			),
-			formatStdin = true,
-			rootMarkers = {
-				"package.json",
-				".prettierrc",
-				".prettierrc.json",
-				".prettierrc.js",
-				".prettierrc.yml",
-				".prettierrc.yaml",
-				".prettierrc.json5",
-				".prettierrc.mjs",
-				".prettierrc.cjs",
-				".prettierrc.toml",
-				"prettier.config.js",
-				"prettier.config.cjs",
-				"prettier.config.mjs",
-			},
-		}
+		local usePrettier = function(executable)
+			return {
+				formatCanRange = true,
+				formatCommand = string.format(
+					"%s '${INPUT}' ${--range-start=charStart} ${--range-end=charEnd} "
+						.. "${--tab-width=tabWidth} ${--use-tabs=!insertSpaces}",
+					fs.executable(executable, fs.Scope.NODE)
+				),
+				formatStdin = true,
+				rootMarkers = {
+					"package.json",
+					".prettierrc",
+					".prettierrc.json",
+					".prettierrc.js",
+					".prettierrc.yml",
+					".prettierrc.yaml",
+					".prettierrc.json5",
+					".prettierrc.mjs",
+					".prettierrc.cjs",
+					".prettierrc.toml",
+					"prettier.config.js",
+					"prettier.config.cjs",
+					"prettier.config.mjs",
+				},
+			}
+		end
+		local prettier = usePrettier("prettier")
+		local prettierd = usePrettier("prettierd")
+
 		local eslint_d = require("efmls-configs.linters.eslint_d")
 		local astyle = require("efmls-configs.formatters.astyle")
 
@@ -137,14 +160,17 @@ return {
 		languages = vim.tbl_extend("force", languages, {
 			-- Custom languages, or override existing ones
 			html = { prettier },
+			toml = { prettier },
 			typescript = { prettier, eslint_d },
 			javascript = { prettier, eslint_d },
+			vue = { prettier, eslint_d },
 			typescriptreact = { prettier, eslint_d },
 			javascriptreact = { prettier, eslint_d },
 			json = { prettier },
 			lua = { require("efmls-configs.formatters.stylua") },
 			go = { require("efmls-configs.formatters.gofumpt") },
 			c = { astyle },
+			cpp = { astyle },
 		})
 		local efmls_config = {
 			filetypes = vim.tbl_keys(languages),
