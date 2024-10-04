@@ -13,3 +13,10 @@ vim.keymap.set("n", "<leader>c", "V:y<CR>")
 
 -- yank to clipboard
 vim.keymap.set("v", "<leader>y", '"+y')
+
+if vim.g.vscode then
+	-- VSCode Neovim
+	require("dimanda.vscode_remap")
+else
+	-- Ordinary Neovim
+end

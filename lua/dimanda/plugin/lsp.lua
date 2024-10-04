@@ -152,6 +152,13 @@ return {
 		end
 		local prettier = usePrettier("prettier")
 		local prettierd = usePrettier("prettierd")
+		local djlintHbs = {
+			formatCommand = string.format(
+				"%s --reformat --profile=handlebars --indent 3 - '${INPUT}'",
+				fs.executable("djlint")
+			),
+			formatStdin = true,
+		}
 
 		local eslint_d = require("efmls-configs.linters.eslint_d")
 		local astyle = require("efmls-configs.formatters.astyle")
@@ -166,6 +173,7 @@ return {
 			vue = { prettier, eslint_d },
 			typescriptreact = { prettier, eslint_d },
 			javascriptreact = { prettier, eslint_d },
+			handlebars = { djlintHbs },
 			json = { prettier },
 			lua = { require("efmls-configs.formatters.stylua") },
 			go = { require("efmls-configs.formatters.gofumpt") },

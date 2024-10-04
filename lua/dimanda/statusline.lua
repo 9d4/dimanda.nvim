@@ -8,15 +8,14 @@
 -- %=                                             left/right separator
 -- %l/%L,%c                                       rownumber/total,colnumber
 -- %{&fileencoding?&fileencoding:&encoding}       file encoding
-vim.opt.statusline =
-	"  %< %{FugitiveHead()} %f %m %r %w %= Ln %l, Col %c  %{&fileencoding?&fileencoding:&encoding}    "
+vim.opt.statusline = "%< %{FugitiveHead()} %f %m %r %w %= Ln %l, Col %c  %{&fileencoding?&fileencoding:&encoding}"
 
 -- minimal statusline on start
 _G.laststatus = 2
 vim.opt.laststatus = _G.laststatus
 
 -- toggle statusline
-vim.keymap.set("n", "<space>z", function()
+vim.keymap.set("n", "<leader>z", function()
 	if _G.laststatus == 0 then
 		_G.laststatus = 2
 	else
