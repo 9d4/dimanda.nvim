@@ -61,6 +61,8 @@ return {
 		})
 
 		-- Mappings
-		vim.keymap.set("n", "<leader>pv", vim.cmd.NvimTreeToggle, { silent = true })
+		if not vim.g.vscode then
+			vim.keymap.set("n", "<leader>pv", vim.cmd.NvimTreeToggle, { silent = true })
+		end
 	end,
 }

@@ -2,6 +2,7 @@ return {
 	"nvim-telescope/telescope.nvim",
 	tag = "0.1.6",
 	requires = { { "nvim-lua/plenary.nvim" } },
+	enabled = not vim.g.vscode, -- Disable Telescope when running in VSCode
 	config = function()
 		require("telescope").setup({
 			defaults = {
