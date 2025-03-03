@@ -20,7 +20,11 @@ else
 	vim.keymap.set("v", "<leader>y", '"+y')
 
 	-- tabpage
-	vim.keymap.set({ "n", "v" }, "<leader>pn", ":tabnext<CR>")
-	vim.keymap.set({ "n", "v" }, "<leader>pp", ":tabprev<CR>")
-	vim.keymap.set({ "n", "v" }, "<leader>pc", ":tabnew<CR>")
+	-- vim.keymap.set({ "n", "v" }, "<leader>pn", ":tabnext<CR>")
+	-- vim.keymap.set({ "n", "v" }, "<leader>pp", ":tabprev<CR>")
+	-- vim.keymap.set({ "n", "v" }, "<leader>pc", ":tabnew<CR>")
+
+	-- buffer next/prev
+	vim.keymap.set("n", "<leader>pn", ":bnext<CR>")
+	vim.keymap.set("n", "<leader>pb", ":bprev<CR>")
 end

@@ -82,7 +82,7 @@ function InitMyColor()
 		styles = {
 			bold = true,
 			italic = true,
-			transparency = false,
+			transparency = true,
 		},
 
 		groups = {
