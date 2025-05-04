@@ -2,8 +2,8 @@ local function usePrettier(fs, executable)
 	return {
 		formatCanRange = true,
 		formatCommand = string.format(
-			"%s '${INPUT}' ${--range-start=charStart} ${--range-end=charEnd} "
-				.. "${--tab-width=tabWidth} ${--use-tabs=!insertSpaces}",
+			"%s '${INPUT}' ${--range-start=charStart} ${--range-end=charEnd} ",
+			-- .. "${--tab-width=tabWidth} ${--use-tabs=!insertSpaces}",
 			fs.executable(executable, fs.Scope.NODE)
 		),
 		formatStdin = true,
@@ -54,11 +54,11 @@ return {
 			-- Custom languages, or override existing ones
 			html = { prettier },
 			toml = { prettier },
-			typescript = { prettier, eslint_d },
-			javascript = { prettier, eslint_d },
-			typescriptreact = { prettier, eslint_d },
-			javascriptreact = { prettier, eslint_d },
-			vue = { prettier, eslint_d },
+			typescript = { prettier },
+			javascript = { prettier },
+			typescriptreact = { prettier },
+			javascriptreact = { prettier },
+			vue = { prettier },
 			handlebars = { djlintHbs },
 			json = { prettier },
 			lua = { require("efmls-configs.formatters.stylua") },

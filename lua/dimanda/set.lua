@@ -3,12 +3,18 @@ vim.opt.guicursor = ""
 vim.opt.nu = true
 vim.opt.relativenumber = true
 
-vim.opt.tabstop = 8
+vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
-vim.opt.expandtab = true
-
+vim.cmd.expandtab = true
+-- vim.cmd.set("noexpandtab")
 vim.opt.smartindent = true
+
+vim.cmd("syntax match Tab /\t/")
+vim.cmd("hi Tab gui=underline guifg=blue ctermbg=blue")
+
+vim.cmd("imap <C-c> <Esc>")
+vim.cmd("let g:omni_sql_no_default_maps = 1")
 
 vim.opt.swapfile = false
 vim.opt.backup = false
