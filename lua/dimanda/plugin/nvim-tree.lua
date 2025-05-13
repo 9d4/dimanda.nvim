@@ -1,4 +1,5 @@
 return {
+
 	"nvim-tree/nvim-tree.lua",
 	-- event = 'BufEnter',
 	dependencies = { "nvim-tree/nvim-web-devicons" },
@@ -38,6 +39,17 @@ return {
 				width = 30,
 				side = "left",
 				signcolumn = "yes",
+				float = {
+					enable = true,
+					open_win_config = {
+						relative = "editor",
+						border = "rounded", -- Or any other border style
+						width = 44, -- Adjust as needed
+						height = 50, -- Adjust as needed
+						row = 8, -- Adjust vertical position
+						col = 10, -- Adjust horizontal position
+					},
+				},
 			},
 			git = {
 				enable = true,
